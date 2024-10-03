@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { toggleTodo } from '../redux/actions';
+import { deleteTodo, toggleTodo } from '../redux/actions';
 import { editTodo } from '../redux/actions';
 
 const TodoItem = ({todo}) => {
@@ -25,6 +25,8 @@ const TodoItem = ({todo}) => {
         </span>)}
 
         <button onClick={handleEdit}>{isEditing ? 'Save' : 'Edit'}</button>
+
+        <button onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>
     </li>
   )
 }

@@ -1,7 +1,7 @@
 /**
  * WORKING OF AN ACTION
  */
-import { ADD_TODO, TOGGLE_TODO, EDIT_TODO } from "./actions";
+import { ADD_TODO, TOGGLE_TODO, EDIT_TODO, DELETE_TODO } from "./actions";
 
 const initialState = {
     todos : []
@@ -30,6 +30,11 @@ const todoReducer = (state = initialState, action) => {
                 todos: state.todos.map(todo => 
                     todo.id == action.payload.id ? {...todo, text: action.payload.newText} : todo
                 )
+            }
+        case DELETE_TODO:
+            return {
+                ...state,
+                todos: state.todos.filter(todo => todo.id != action.payload)
             }
         default:
             return state;
