@@ -1,18 +1,12 @@
 /**
  * WORKING OF AN ACTION
  */
-import { ADD_TODO, TOGGLE_TODO } from "./actions";
+import { ADD_TODO, TOGGLE_TODO, EDIT_TODO } from "./actions";
 
 const initialState = {
     todos : []
 }
 
-/**
- * action = {
-        type: ADD_TODO,
-        payload: 'om'
-    }
- */
 const todoReducer = (state = initialState, action) => {
     switch(action.type) {
         case ADD_TODO:
@@ -28,6 +22,13 @@ const todoReducer = (state = initialState, action) => {
                 ...state,
                 todos: state.todos.map(todo => 
                     todo.id == action.payload ? {...todo, completed: !todo.completed} : todo
+                )
+            }
+        case EDIT_TODO: 
+            return {
+                ...state,
+                todos: state.todos.map(todo => 
+                    todo.id == action.payload.id ? {...todo, text: action.payload.newText} : todo
                 )
             }
         default:
